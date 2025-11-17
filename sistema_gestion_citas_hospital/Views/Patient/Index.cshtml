@@ -1,0 +1,84 @@
+@model IEnumerable<Patient>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary m-1 my-2" asp-action="Create">Register new patient</a>
+            @* if ok exist it is good message otherwise it is worse message *@
+            @if (TempData["OK"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Message"]
+                </div>
+            }
+            else
+            {
+                if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["Message"]
+                    </div>
+                }
+            }
+            <form asp-action="Index" method="get" class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <input type="text"
+                           name="document"
+                           id="patientDocument"
+                           class="form-control"
+                           placeholder="Enter patient document..."
+                           value="@ViewBag.PatientDocument" />
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-primary">Find</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+                </div>
+            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var doctor in Model)
+                {
+                    <tr>
+                        <th scope="row">@doctor.Id</th>
+                        <td>@doctor.Name</td>
+                        <td>@doctor.Document</td>
+                        <td>@doctor.Age</td>
+                        <td>@doctor.Phone</td>
+                        <td>@doctor.Email</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@doctor.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@doctor.Id" class="btn btn-danger">Destroy</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    //little script for hide the alerts
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            alert.classList.add('fade');
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        });
+    }, 5000);
+</script>

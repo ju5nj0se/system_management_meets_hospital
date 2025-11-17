@@ -1,0 +1,39 @@
+ALTER DATABASE hospital_assesment
+SET timezone TO 'America/Bogota';
+
+create table doctors(
+id serial primary key,
+name varchar(200),
+document varchar(200) unique,
+especiality varchar(200),
+phone varchar(200),
+email varchar(200)
+);
+
+create table patients(
+id serial primary key,
+name varchar(200),
+document varchar(200) unique,
+age integer,
+phone varchar(100),
+email varchar(100)
+);
+
+
+create table meets(
+id serial primary key,
+patient_id int,
+doctor_id int,
+date_meet date,
+time_start time,
+time_end time,
+status varchar(100),
+
+foreign key(patient_id) references patients(id)
+on update cascade
+on delete cascade,
+
+foreign key(doctor_id) references doctors(id)
+on update cascade
+on delete cascade
+);

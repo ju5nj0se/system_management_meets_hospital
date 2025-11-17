@@ -1,0 +1,61 @@
+@model HospitalSanVicente.ViewModels.AdminMeetVM
+
+<div class="container">
+    <div class="row">
+        <h2>Register new meet</h2>
+        @if (TempData["OK"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+        else
+        {
+            if (TempData["Message"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Message"]
+                </div>
+            }
+        }
+        <div class="col">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form asp-controller="Meet" asp-action="Create" method="post">
+                <div class="form-group mb-3">
+                    <label class="form-label">Input the document of the patient</label>
+                    <input type="number" asp-for="Document" class="form-control"/>
+                    <span asp-validation-for="Document" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="DoctorId" class="form-label"></label>
+                    <select asp-for="DoctorId" asp-items="ViewBag.Doctors" class="form-control">
+                        <option value="">-- Select a doctor --</option>
+                    </select>
+                    <span asp-validation-for="DoctorId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="DateMeet" class="form-label"></label>
+                    <input type="date" asp-for="DateMeet" class="form-control"/>
+                    <span asp-validation-for="DateMeet" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="StartTimeDate" class="form-label"></label>
+                    <input type="time" asp-for="StartTimeDate" class="form-control"/>
+                    <span asp-validation-for="StartTimeDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="EndTimeDate" class="form-label"></label>
+                    <input type="time" asp-for="EndTimeDate" class="form-control"/>
+                    <span asp-validation-for="EndTimeDate" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Status" value="pending"/> 
+                <div>
+                    <button id="submit" type="submit" class="btn btn-primary">Register</button>
+                    <a asp-action="Index" class="btn btn-secondary">Return</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
