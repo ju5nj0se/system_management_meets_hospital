@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using HospitalSanVicente.Validations;
+using SystemManagementMeets.Validations;
 
-namespace HospitalSanVicente.Models;
+namespace SystemManagementMeets.Models;
 
 public class Meet
 {

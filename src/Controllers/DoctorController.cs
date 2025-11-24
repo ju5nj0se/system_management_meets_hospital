@@ -1,11 +1,11 @@
 using System.Runtime.InteropServices.JavaScript;
 using Microsoft.AspNetCore.Mvc;
-using HospitalSanVicente.Data;
-using HospitalSanVicente.Models;
+using SystemManagementMeets.Data;
+using SystemManagementMeets.Models;
 using Microsoft.EntityFrameworkCore;
 using SistemaGestionCitasHospital.ViewModels;
 
-namespace HospitalSanVicente.Controllers;
+namespace SystemManagementMeets.Controllers;
 
 public class DoctorController : Controller
 {

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace HospitalSanVicente.Models;
+namespace SystemManagementMeets.Models;
 
 public class Patient
 {

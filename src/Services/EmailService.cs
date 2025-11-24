@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using MimeKit;
-using HospitalSanVicente.Models;
-using HospitalSanVicente.ViewModels; 
+using SystemManagementMeets.Models;
+using SystemManagementMeets.ViewModels; 
 
 
 namespace SistemaGestionCitasHospital.Services;

@@ -1,5 +1,5 @@
-using HospitalSanVicente.Data;
-using HospitalSanVicente.Models;
+using SystemManagementMeets.Data;
+using SystemManagementMeets.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

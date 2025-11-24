@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using HospitalSanVicente.Data;
-using HospitalSanVicente.Models;
+using SystemManagementMeets.Data;
+using SystemManagementMeets.Models;
 
-namespace HospitalSanVicente.Controllers;
+namespace SystemManagementMeets.Controllers;
 
 public class PatientController : Controller
 {

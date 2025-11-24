@@ -1,4 +1,4 @@
-namespace HospitalSanVicente.Models;
+namespace SystemManagementMeets.Models;
 
 public class ErrorVM
 {

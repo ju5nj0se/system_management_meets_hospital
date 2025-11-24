@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using HospitalSanVicente.Models;
+using SystemManagementMeets.Models;
 
-namespace HospitalSanVicente.Data;
+namespace SystemManagementMeets.Data;
 
 public class AppDbContext : DbContext
 {

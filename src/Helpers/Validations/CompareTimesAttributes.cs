@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace HospitalSanVicente.Validations
+namespace SystemManagementMeets.Validations
 {
     public class CompareTimesAttribute : ValidationAttribute
     {

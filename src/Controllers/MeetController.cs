@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using HospitalSanVicente.Data;
-using HospitalSanVicente.Models;
+using SystemManagementMeets.Data;
+using SystemManagementMeets.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using HospitalSanVicente.ViewModels;
+using SystemManagementMeets.ViewModels;
 using MailKit.Net.Smtp;
 using MailKit;
 using MimeKit;
 using SistemaGestionCitasHospital.Services;
 
-namespace HospitalSanVicente.Controllers;
+namespace SystemManagementMeets.Controllers;
 
 public class MeetController : Controller
 {

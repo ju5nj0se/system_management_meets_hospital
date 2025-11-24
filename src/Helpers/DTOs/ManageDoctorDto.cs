@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HospitalSanVicente.Models;
+using SystemManagementMeets.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace SistemaGestionCitasHospital.ViewModels;
