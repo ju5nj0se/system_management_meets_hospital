@@ -1,0 +1,63 @@
+@model Doctor
+
+<div class="container">
+    <div class="row">
+        <h2>Register new doctor</h2>
+        @if (TempData["OK"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+        else
+        {
+            if (TempData["Message"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Message"]
+                </div>
+            }
+        }
+        <div class="col">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form asp-controller="Doctor" asp-action="Create" method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="Document" class="form-label"></label>
+                    <input type="number" asp-for="Document" class="form-control"/>
+                    <span asp-validation-for="Document" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input type="text" asp-for="Name" class="form-control"/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Especiality" class="form-label"></label>
+                    <select asp-for="Especiality" class="form-control">
+                        <option value="">-- Select --</option>
+                        <option value="pediatric">Pediatric</option>
+                        <option value="surgery">Surgery</option>
+                        <option value="cardiology">Cardiology</option>
+                    </select>
+                    <span asp-validation-for="Especiality" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input type="number" asp-for="Phone" class="form-control"/>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input type="email" asp-for="Email" class="form-control"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div>
+                    <button id="submit" type="submit" class="btn btn-primary">Register</button>
+                    <a asp-action="Index" class="btn btn-secondary">Return</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

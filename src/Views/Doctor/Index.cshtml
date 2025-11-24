@@ -1,0 +1,89 @@
+@model IEnumerable<Doctor>
+<div class="container" id="content">
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary m-1 my-2" asp-action="Create">Register new doctor</a>
+            @* if ok exist it is good message otherwise it is worse message *@
+            @if (TempData["OK"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Message"]
+                </div>
+            }
+            else
+            {
+                if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["Message"]
+                    </div>
+                }
+            }
+            <hr />
+            <h4><b>Filter</b></h4>
+            <div class="d-flex justify-content-start align-items-center">
+                <form asp-action="Index" asp-controller="Doctor" method="get" class="d-flex align-items-center me-2">
+                    <div class="me-2 w-75">
+                        <select class="form-control" name="param">
+                            <option value="">-- Select --</option>
+                            <option value="pediatric">Pediatric</option>
+                            <option value="surgery">Surgery</option>
+                            <option value="cardiology">Cardiology</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+                <form asp-action="Index" asp-controller="Doctor" method="get">
+                    <button class="btn btn-dark" type="submit">Clean</button>
+                </form>
+            </div>
+
+            
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Especiality</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var doctor in Model)
+                {
+                    <tr>
+                        <th scope="row">@doctor.Id</th>
+                        <td>@doctor.Name</td>
+                        <td>@doctor.Document</td>
+                        <td>@doctor.Especiality</td>
+                        <td>@doctor.Phone</td>
+                        <td>@doctor.Email</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@doctor.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@doctor.Id" class="btn btn-danger">Destroy</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            alert.classList.add('fade');
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500); // se elimina del DOM
+        });
+    }, 5000);
+</script>

@@ -1,0 +1,149 @@
+@model IEnumerable<Meet>
+
+<div class="container" id="content">
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary m-1 my-2" asp-action="Create">Schedule new meet</a>
+            <form asp-action="Index" method="get" class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <label for="doctorDocument" class="col-form-label fw-bold">Doctor Document:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text"
+                           name="doctorDocument"
+                           id="doctorDocument"
+                           class="form-control"
+                           placeholder="Enter doctor document..."
+                           value="@ViewBag.DoctorDocument" />
+                </div>
+                
+                <div class="col-auto">
+                    <label for="patientDocument" class="col-form-label fw-bold">Patient Document:</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text"
+                           name="patientDocument"
+                           id="patientDocument"
+                           class="form-control"
+                           placeholder="Enter patient document..."
+                           value="@ViewBag.PatientDocument" />
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-primary">Find</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+                </div>
+            </form>
+
+            <!-- Mensajes -->
+            @if (TempData["OK"] != null)
+            {
+                <div class="alert alert-success">@TempData["Message"]</div>
+            }
+            else if (TempData["Message"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Message"]</div>
+            }
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Document Patient</th>
+                    <th>Document Doctor</th>
+                    <th>Date of the meet</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var meet in Model)
+                {
+                    <tr>
+                        <th>@meet.Id</th>
+                        <td>@meet.Patient.Document</td>
+                        <td>@meet.Doctor.Document</td>
+                        <td>@meet.DateMeet.ToString("yyyy-MM-dd")</td>
+                        <td>@meet.Status</td>
+                        <td>
+                            <button type="button"
+                                    class="btn btn-secondary btn-details"
+                                    data-id="@meet.Id"
+                                    data-patient="@meet.Patient.Document"
+                                    data-pname="@meet.Patient.Name"
+                                    data-doctor="@meet.Doctor.Document"
+                                    data-dname="@meet.Doctor.Name"
+                                    data-date="@meet.DateMeet.ToString("yyyy-MM-dd")"
+                                    data-start="@meet.StartTimeDate.ToString("HH:mm")"
+                                    data-end="@meet.EndTimeDate.ToString("HH:mm")"
+                                    data-status="@meet.Status">
+                                Details
+                            </button>
+                            <a asp-action="Details" asp-route-id="@meet.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@meet.Id" class="btn btn-danger">Destroy</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- 🧱 Modal Bootstrap -->
+<div class="modal fade" id="meetModal" tabindex="-1" aria-labelledby="meetModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="meetModalLabel">Meet details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>ID:</strong> <span id="modalId"></span></li>
+                    <li class="list-group-item"><strong>Patient Document:</strong> <span id="modalPatient"></span></li>
+                    <li class="list-group-item"><strong>Name patient:</strong> <span id="modalPatientName"></span></li>
+                    <li class="list-group-item"><strong>Doctor Document:</strong> <span id="modalDoctor"></span></li>
+                    <li class="list-group-item"><strong>Name doctor:</strong> <span id="modalDoctorName"></span></li>
+                    <li class="list-group-item"><strong>Date:</strong> <span id="modalDate"></span></li>
+                    <li class="list-group-item"><strong>Start Time:</strong> <span id="modalStart"></span></li>
+                    <li class="list-group-item"><strong>End Time:</strong> <span id="modalEnd"></span></li>
+                    <li class="list-group-item"><strong>Status:</strong> <span id="modalStatus"></span></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            alert.classList.add('fade');
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500); // se elimina del DOM
+        });
+    }, 5000);
+
+    // Abre el modal con la info del meet
+    document.querySelectorAll('.btn-details').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('modalId').textContent = button.dataset.id;
+            document.getElementById('modalPatient').textContent = button.dataset.patient;
+            document.getElementById('modalPatientName').textContent = button.dataset.pname;
+            document.getElementById('modalDoctor').textContent = button.dataset.doctor;
+            document.getElementById('modalDoctorName').textContent = button.dataset.dname;
+            document.getElementById('modalDate').textContent = button.dataset.date;
+            document.getElementById('modalStart').textContent = button.dataset.start;
+            document.getElementById('modalEnd').textContent = button.dataset.end;
+            document.getElementById('modalStatus').textContent = button.dataset.status;
+
+            const modal = new bootstrap.Modal(document.getElementById('meetModal'));
+            modal.show();
+        });
+    });
+</script>
